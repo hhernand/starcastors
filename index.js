@@ -1,0 +1,61 @@
+const Discord = require('discord.js');
+const bot = new Discord.Client();
+const mysql = require('mysql');
+
+const db = require('require-dir-all')('./commands/db');
+
+if(process.env.JAWSDB_URL) {
+    con = mysql.createConnection(process.env.JAWSDB_URL);
+};
+
+bot.on('message', (message) => {
+  let msg = message.content.toLowerCase();
+
+  if (msg.startsWith('c!add ')) {
+
+    //c!add story tag startingscenetag [title]
+    //c!add scene tag [text]
+    //c!add choice tag scene1tag scene2tag [choice]
+
+    let data = msg.split(' ');
+
+    switch (data[1]) {
+      case 'story':
+        db.add.addStory(message, con);
+        break;
+      case 'scene':
+        db.add.addScene(message, con);
+        break;
+      case 'choice':
+        db.add.addChoice(message, con);
+        break;
+      default:
+        message.channel.send('Invalid.');
+    }
+  }
+
+  if (msg.startsWith('c!search ')) {
+
+    //c!search story tag
+    //c!search scene tag
+    //c!search choice tag
+
+    let data = msg.split(' ');
+
+    switch (data[1]) {
+      case 'story':
+        db.search.searchStory(message, con);
+        break;
+      case 'scene':
+        db.search.searchScene(message, con);
+        break;
+      case 'choice':
+        db.search.searchChoice(message, con);
+        break;
+      default:
+        message.channel.send('Invalid.');
+    }
+  }
+});
+
+bot.login(process.env.BOT_TOKEN);
