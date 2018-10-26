@@ -34,6 +34,29 @@ bot.on('message', (message) => {
     }
   }
 
+  if (msg.startsWith('c!list ')) {
+
+    //c!list stories
+    //c!list scenes
+    //c!list choices
+
+    let data = msg.split(' ');
+
+    switch (data[1]) {
+      case 'stories':
+        db.list.listStories(message, con);
+        break;
+      case 'scenes':
+        db.list.listScenes(message, con);
+        break;
+      case 'choices':
+        db.list.listChoices(message, con);
+        break;
+      default:
+        message.channel.send('Invalid.');
+    }
+  }
+
   if (msg.startsWith('c!search ')) {
 
     //c!search story tag

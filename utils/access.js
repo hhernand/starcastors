@@ -1,4 +1,28 @@
 module.exports = {
+  stories: function(con, callback){
+    let sql = 'SELECT * FROM story';
+    con.query(sql, (err, res) => {
+      if (err) throw err;
+      else callback(res);
+    });
+  },
+
+  scenes: function(con, callback){
+    let sql = 'SELECT * FROM scene';
+    con.query(sql, (err, res) => {
+      if (err) throw err;
+      else callback(res);
+    });
+  },
+
+  choices: function(con, callback){
+    let sql = 'SELECT * FROM choice';
+    con.query(sql, (err, res) => {
+      if (err) throw err;
+      else callback(res);
+    });
+  },
+
   storyByTag: function(tag, con, callback){
     let sql = 'SELECT * FROM story WHERE tag = "' + tag + '"';
     con.query(sql, (err, story) => {
