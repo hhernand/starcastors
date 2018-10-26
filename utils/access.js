@@ -15,6 +15,14 @@ module.exports = {
     });
   },
 
+  choiceByTag: function(tag, con, callback){
+    let sql = 'SELECT * FROM choice WHERE tag = "' + tag + '"';
+    con.query(sql, (err, choice) => {
+      if (err) throw err;
+      else callback(choice);
+    });
+  },
+
   sceneByID: function(id, con, callback){
     let sql = 'SELECT * FROM scene WHERE sceneID = ' + id;
     con.query(sql, (err, scene) => {

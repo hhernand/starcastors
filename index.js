@@ -56,6 +56,14 @@ bot.on('message', (message) => {
         message.channel.send('Invalid.');
     }
   }
+
+  if (msg.startsWith('c!start ')) {
+    db.venture.start(message, con);
+  }
+
+  if (msg.startsWith('c!pick ')){
+    db.venture.pick(message, con);
+  }
 });
 
 bot.login(process.env.BOT_TOKEN);
