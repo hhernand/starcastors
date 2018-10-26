@@ -28,6 +28,14 @@ module.exports = {
   },
 
   searchChoice: function(msg, con) {
-    msg.channel.send('Placeholder.');
+    let choicetag = msg.content.split(' ')[2];
+    access.choiceByTag(choicetag, con, function(choice) {
+      if (choice.length == 1) {
+        helper.displayScene('Choice Tag ' + choicetag + ' appears in:\n\n', choice[0].scene, msg, con);
+      }
+      else {
+        msg.channel.send('No choice exists with that tag.');
+      }
+    })
   }
 }
