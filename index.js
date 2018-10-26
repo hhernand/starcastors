@@ -34,6 +34,29 @@ bot.on('message', (message) => {
     }
   }
 
+  if (msg.startsWith('c!delete ')) {
+
+    //c!search story tag
+    //c!search scene tag
+    //c!search choice tag
+
+    let data = msg.split(' ');
+
+    switch (data[1]) {
+      case 'story':
+        db.delete.deleteStory(message, con);
+        break;
+      case 'scene':
+        db.delete.deleteScene(message, con);
+        break;
+      case 'choice':
+        db.delete.deleteChoice(message, con);
+        break;
+      default:
+        message.channel.send('Invalid.');
+    }
+  }
+
   if (msg.startsWith('c!list ')) {
 
     //c!list stories
