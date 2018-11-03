@@ -29,6 +29,9 @@ bot.on('message', (message) => {
       case 'choice':
         db.add.addChoice(message, con);
         break;
+      case 'castor':
+        db.add.addCastor(message, con);
+        break;
       default:
         message.channel.send('Invalid.');
     }
@@ -97,6 +100,9 @@ bot.on('message', (message) => {
         break;
       case 'choice':
         db.search.searchChoice(message, con);
+        break;
+      case 'castor':
+        db.search.searchCastor(message, con);
         break;
       default:
         message.channel.send('Invalid.');

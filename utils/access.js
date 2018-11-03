@@ -55,6 +55,14 @@ module.exports = {
     });
   },
 
+  castorByID: function(id, con, callback){
+    let sql = 'SELECT * FROM castor WHERE castorID = ' + id;
+    con.query(sql, (err, castor) => {
+      if (err) throw err;
+      else callback(castor);
+    });
+  },
+
   choiceByScene: function(sceneID, con, callback){
     let sql = 'SELECT * FROM choice WHERE scene = ' + sceneID;
     con.query(sql, (err, choices) => {

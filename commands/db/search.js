@@ -37,5 +37,19 @@ module.exports = {
         msg.channel.send('No choice exists with that tag.');
       }
     })
+  },
+
+  searchCastor: function(msg, con) {
+    let castorid = msg.content.split(' ')[2];
+    access.castorByID(castorid, con, function(castor){
+      if (castor.length == 1) {
+        let res = '**ID:** ' + castorid + '\n';
+        res += '**Name:** ' + castor[0].name + '\n';
+        res += '**Level:** ' + castor[0].level + '\n';
+        res += '**Owner:** <@' + castor[0].owner + '>\n';
+        res += castor[0].link;
+        msg.channel.send(res);
+      }
+    })
   }
 }

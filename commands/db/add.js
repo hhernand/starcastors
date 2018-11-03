@@ -70,5 +70,32 @@ module.exports = {
         }
       })
     }
+  },
+
+  addCastor: function(msg, con) {
+    //id name level link owner
+    let data = (msg.content.split('c!add castor ')[1]).split(' ');
+
+    if (data.length == 5) {
+      let id = Number(data[0]);
+      let level = Number(data[2]);
+
+      if (!isNaN(id) && !isNaN(level)) {
+        let name = data[1];
+        let link = data[3];
+        let owner = msg.mentions.users.first().id;
+        let sql = 'INSERT INTO castor VALUES(' + id + ', "' + name + '", ' + level + ', "' + link + '", "' + owner + '")';
+        con.query(sql);
+        msg.channel.send(name + ' has been added to the castor database.');
+      }
+
+      else {
+        msg.channel.send('Your numbers don\'t add up (Numbers are in the wrong place. c!add castor id name level link)');
+      }
+    }
+
+    else {
+      msg.channel.send('Too many or too few words. Reminder that the format is c!add castor id name level link');
+    }
   }
 }
