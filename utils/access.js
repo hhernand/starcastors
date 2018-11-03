@@ -69,5 +69,13 @@ module.exports = {
       if (err) throw err;
       else callback(choices);
     });
+  },
+
+  castorsByOwner: function(owner, con, callback){
+    let sql = 'SELECT * FROM castor WHERE owner = "' + owner + '"';
+    con.query(sql, (err, castors) => {
+      if (err) throw err;
+      else callback(castors);
+    });
   }
 }

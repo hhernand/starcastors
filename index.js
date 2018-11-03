@@ -11,6 +11,10 @@ if(process.env.JAWSDB_URL) {
 bot.on('message', (message) => {
   let msg = message.content.toLowerCase();
 
+  if (msg == 'c!mycastors') {
+    db.list.myCastors(message, con);
+  }
+
   if (msg.startsWith('c!add ')) {
 
     //c!add story tag startingscenetag [title]

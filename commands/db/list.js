@@ -50,5 +50,23 @@ module.exports = {
         msg.channel.send(res);
       }
     })
+  },
+
+  myCastors: function(msg, con) {
+    let id = msg.author.id;
+
+    access.castorsByOwner(id, con, function(castors){
+      if (castors.length > 0) {
+        let res = '**My Castors**\n\n';
+        for (i = 0; i < castors.length; i++) {
+          res += 'ID ' + castors[i].castorID + ' - ' + castors[i].name + ' - Level ' + castors[i].level + '\n';
+        }
+        msg.channel.send(res);
+      }
+
+      else {
+        msg.channel.send('You don\'t have any castors.');
+      }
+    })
   }
 }
