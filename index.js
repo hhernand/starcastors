@@ -41,6 +41,21 @@ bot.on('message', (message) => {
     }
   }
 
+  if (msg.startsWith('c!update ')) {
+
+    //c!update castor id <what to update> <updated value>
+
+    let data = msg.split(' ');
+
+    switch (data[1]) {
+      case 'castor':
+        db.update.updateCastor(message, con);
+        break;
+      default:
+        message.channel.send('Invalid.');
+    }
+  }
+
   if (msg.startsWith('c!delete ')) {
 
     //c!search story tag
