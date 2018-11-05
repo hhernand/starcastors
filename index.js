@@ -20,6 +20,7 @@ bot.on('message', (message) => {
     //c!add story tag startingscenetag [title]
     //c!add scene tag [text]
     //c!add choice tag scene1tag scene2tag [choice]
+    //c!add castor id name link owner
 
     let data = msg.split(' ');
 
@@ -58,9 +59,9 @@ bot.on('message', (message) => {
 
   if (msg.startsWith('c!delete ')) {
 
-    //c!search story tag
-    //c!search scene tag
-    //c!search choice tag
+    //c!delete story tag
+    //c!delete scene tag
+    //c!delete choice tag
 
     let data = msg.split(' ');
 
@@ -107,6 +108,7 @@ bot.on('message', (message) => {
     //c!search story tag
     //c!search scene tag
     //c!search choice tag
+    //c!search castor id
 
     let data = msg.split(' ');
 
