@@ -73,18 +73,17 @@ module.exports = {
   },
 
   addCastor: function(msg, con) {
-    //id name level link owner
+    //id name link owner
     let data = (msg.content.split('c!add castor ')[1]).split(' ');
 
-    if (data.length == 5) {
+    if (data.length == 4) {
       let id = Number(data[0]);
-      let level = Number(data[2]);
 
-      if (!isNaN(id) && !isNaN(level)) {
+      if (!isNaN(id)) {
         let name = data[1];
-        let link = data[3];
+        let link = data[2];
         let owner = msg.mentions.users.first().id;
-        let sql = 'INSERT INTO castor VALUES(' + id + ', "' + name + '", ' + level + ', "' + link + '", "' + owner + '")';
+        let sql = 'INSERT INTO castor (castorID, name, link, owner) VALUES(' + id + ', "' + name + '", "' + link + '", "' + owner + '")';
         con.query(sql);
         msg.channel.send(name + ' has been added to the castor database.');
       }
