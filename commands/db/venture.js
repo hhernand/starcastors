@@ -9,22 +9,27 @@ module.exports = {
         let castorid = msg.content.split(' ')[2];
         access.castorByID(castorid, con, function(castor) {
           if (castor.length == 1) {
-            access.castorLogByStory(castorid, story[0].storyID, con, function(log) {
-              if (log.length == 0) {
-                if (msg.author.id == castor[0].owner) {
-                  let begin = '**' + story[0].name + '**\n\n';
-                  helper.displayScene(begin, story[0].start, msg, con);
-                  let sql = 'INSERT INTO venturelog (castorID, sceneID, storyID) VALUES(' + castorid + ', ' + story[0].start + ', ' + story[0].storyID + ')';
-                  con.query(sql);
+            if (castor[0].level >= story[0].minlevel) {
+              access.castorLogByStory(castorid, story[0].storyID, con, function(log) {
+                if (log.length == 0) {
+                  if (msg.author.id == castor[0].owner) {
+                    let begin = '**' + story[0].name + '**\n\n';
+                    helper.displayScene(begin, story[0].start, msg, con);
+                    let sql = 'INSERT INTO venturelog (castorID, sceneID, storyID) VALUES(' + castorid + ', ' + story[0].start + ', ' + story[0].storyID + ')';
+                    con.query(sql);
+                  }
+                  else {
+                    msg.channel.send('You don\'t own that castor.');
+                  }
                 }
                 else {
-                  msg.channel.send('You don\'t own that castor.');
+                  msg.channel.send('Stories cannot be restarted with the same castor unless ownership of the castor has been changed.');
                 }
-              }
-              else {
-                msg.channel.send('Stories cannot be restarted with the same castor unless ownership of the castor has been changed.');
-              }
-            })
+              })
+            }
+            else {
+              msg.channel.send('Castor\'s level is not high enough for ' + story[0].name) + '.';
+            }
           }
         })
       }

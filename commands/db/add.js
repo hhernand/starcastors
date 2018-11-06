@@ -2,7 +2,7 @@ const access = require('../../utils/access.js');
 
 module.exports = {
   addStory: function(msg, con) {
-    //tag starttag [title]
+    //tag starttag [title] minlevel
     let data = (msg.content.split('c!add story ')[1]).split(' ');
 
     if (data.length > 2) {
@@ -11,9 +11,15 @@ module.exports = {
       access.sceneByTag(start, con, function(scene) {
         if (scene.length == 1){
           let title = (msg.content.split('[')[1]).split(']')[0];
-          let sql = 'INSERT INTO story (tag, name, start) VALUES("' + tag + '", "' + title + '", ' + scene[0].sceneID + ')';
-          con.query(sql);
-          msg.channel.send(title + ' has been created with the ' + tag + ' tag.');
+          let minlevel = Number(data[data.length - 1]);
+          if (!isNaN(minlevel)) {
+            let sql = 'INSERT INTO story (tag, name, start, minlevel) VALUES("' + tag + '", "' + title + '", ' + scene[0].sceneID + ', ' + minlevel + ')';
+            con.query(sql);
+            msg.channel.send(title + ' has been created with the ' + tag + ' tag.');
+          }
+          else {
+            msg.channel.send('Minimum level is missing.');
+          }
         }
         else {
           msg.channel.send('That scene does not exist, you cannot make a story without one.');
