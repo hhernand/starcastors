@@ -48,6 +48,12 @@ bot.on('message', (message) => {
       let data = msg.split(' ');
 
       switch (data[1]) {
+        case 'scene':
+          db.update.updateScene(message, con);
+          break;
+        case 'story':
+          db.update.updateStory(message, con);
+          break;
         case 'castor':
           db.update.updateCastor(message, con);
           break;
