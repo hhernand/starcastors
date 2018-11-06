@@ -93,5 +93,16 @@ module.exports = {
       if (err) throw err;
       else callback(log);
     });
+  },
+
+  castorLog: function(castorid, storyid, con, callback){
+    let select = 'SELECT c.name, sc.tag FROM venturelog v ';
+    let join = 'JOIN castor c ON v.castorID = c.castorID JOIN scene sc ON v.sceneID = sc.sceneID ';
+    let where = 'WHERE c.castorID = ' + castorid + ' AND v.storyID = ' + storyid;
+    let sql = select + join + where;
+    con.query(sql, (err, log) => {
+      if (err) throw err;
+      else callback(log);
+    });
   }
 }

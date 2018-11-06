@@ -15,6 +15,10 @@ bot.on('message', (message) => {
     db.list.myCastors(message, con);
   }
 
+  if (msg.startsWith('c!log ')) {
+    db.list.journeyLog(message, con);
+  }
+
   if (msg.startsWith('c!add ')) {
 
     //c!add story tag startingscenetag [title]

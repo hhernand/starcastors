@@ -68,5 +68,36 @@ module.exports = {
         msg.channel.send('You don\'t have any castors.');
       }
     })
+  },
+
+  journeyLog: function(msg, con) {
+    let storytag = msg.content.split(' ')[2];
+    access.storyByTag(storytag, con, function(story) {
+      if (story.length == 1) {
+        let castorid = Number(msg.content.split(' ')[1]);
+        if (!isNaN(castorid)) {
+          access.castorLog(castorid, story[0].storyID, con, function(log) {
+            if (log.length > 0) {
+              let apos = '\'';
+              let name = log[0].name;
+              if (name[name.length - 1] != 's') {
+                apos += 's';
+              }
+              let res = name + apos + ' progress in ' + story[0].name + '\n\n';
+              for (i = 0; i < log.length; i++) {
+                res += log[i].tag + '\n';
+              }
+              msg.channel.send(res);
+            }
+            else {
+              msg.channel.send('Castor has not started that adventure yet.');
+            }
+          })
+        }
+      }
+      else {
+        msg.channel.send('Story does not exist.');
+      }
+    })
   }
 }
