@@ -44,5 +44,20 @@ module.exports = {
         msg.channel.send('No choice has that tag.');
       }
     })
+  },
+
+  deleteCastor: function(msg, con) {
+    let id = msg.content.split(' ')[2];
+
+    access.castorByID(id, con, function(castor) {
+      if (castor.length == 1) {
+        let sql = 'DELETE FROM castor WHERE castorID = ' + castor[0].castorID;
+        con.query(sql);
+        msg.channel.send('Castor ' + id + ' has been deleted.');
+      }
+      else {
+        msg.channel.send('Castor does not exist.');
+      }
+    })
   }
 }

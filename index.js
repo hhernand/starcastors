@@ -61,6 +61,7 @@ bot.on('message', (message) => {
       //c!delete story tag
       //c!delete scene tag
       //c!delete choice tag
+      //c!delete castor id
 
       let data = msg.split(' ');
 
@@ -73,6 +74,9 @@ bot.on('message', (message) => {
           break;
         case 'choice':
           db.delete.deleteChoice(message, con);
+          break;
+        case 'castor':
+          db.delete.deleteCastor(message, con);
           break;
         default:
           message.channel.send('Invalid.');
