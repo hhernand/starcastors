@@ -77,5 +77,21 @@ module.exports = {
       if (err) throw err;
       else callback(castors);
     });
+  },
+
+  castorLogByStory: function(castorid, storyid, con, callback){
+    let sql = 'SELECT * FROM venturelog WHERE castorID = ' + castorid + ' AND storyID = ' + storyid;
+    con.query(sql, (err, log) => {
+      if (err) throw err;
+      else callback(log);
+    });
+  },
+
+  castorLogByScene: function(castorid, sceneid, con, callback){
+    let sql = 'SELECT * FROM venturelog WHERE castorID = ' + castorid + ' AND sceneID = ' + sceneid + ' AND choiceID IS NULL';
+    con.query(sql, (err, log) => {
+      if (err) throw err;
+      else callback(log);
+    });
   }
 }
