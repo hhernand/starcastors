@@ -14,7 +14,7 @@ module.exports = {
                 if (log.length == 0) {
                   if (msg.author.id == castor[0].owner) {
                     let begin = '**' + story[0].name + '**\n\n';
-                    helper.displayScene(begin, story[0].start, msg, con);
+                    helper.displayScene(begin, story[0].start, castor[0].name, msg, con);
                     let sql = 'INSERT INTO venturelog (castorID, sceneID, storyID) VALUES(' + castorid + ', ' + story[0].start + ', ' + story[0].storyID + ')';
                     con.query(sql);
                   }
@@ -49,7 +49,7 @@ module.exports = {
             if (msg.author.id == castor[0].owner) {
               access.castorLogByScene(castorid, choice[0].scene, con, function(logentry) {
                 if (logentry.length == 1) {
-                  helper.displayScene('', choice[0].next, msg, con);
+                  helper.displayScene('', choice[0].next, castor[0].name, msg, con);
                   let sql1 = 'UPDATE venturelog SET choiceID = ' + choice[0].choiceID + ' WHERE castorID = ' + castorid + ' AND sceneID = ' + choice[0].scene;
                   let sql2 = 'INSERT INTO venturelog (castorID, sceneID, storyID) VALUES(' + castorid + ', ' + choice[0].next + ', ' + logentry[0].storyID + ')';
                   con.query(sql1);

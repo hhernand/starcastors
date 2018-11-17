@@ -1,7 +1,7 @@
 const access = require('./access.js');
 
 module.exports = {
-  displayScene: function(add, sceneID, msg, con) {
+  displayScene: function(add, sceneID, castor, msg, con) {
     access.sceneByID(sceneID, con, function(scene){
       if (scene.length == 1) {
         access.choiceByScene(sceneID, con, function(choices) {
@@ -13,7 +13,7 @@ module.exports = {
             }
           }
 
-          msg.channel.send(add + scene[0].scenario + '\n\n' + options);
+          msg.channel.send(add + (scene[0].scenario).replace(/<<castor>>/gi, castor) + '\n\n' + options);
         })
       }
     })
