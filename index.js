@@ -11,7 +11,7 @@ if(process.env.JAWSDB_URL) {
 bot.on('message', (message) => {
   let msg = message.content.toLowerCase();
 
-  if (message.channel.id == '505397677773684736') {
+  if (message.channel.id == '505397677773684736' || message.channel.id == '518342675150274560') {
     // commands only mods can use
 
     if (msg.startsWith('c!add ')) {

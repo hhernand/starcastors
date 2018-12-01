@@ -11,6 +11,7 @@ module.exports = {
       access.sceneByTag(start, con, function(scene) {
         if (scene.length == 1){
           let title = (msg.content.split('[')[1]).split(']')[0];
+          title = title.replace(/'/gi, '\'\'');
           let minlevel = Number(data[data.length - 1]);
           if (!isNaN(minlevel)) {
             let sql = 'INSERT INTO story (tag, name, start, minlevel) VALUES("' + tag + '", "' + title + '", ' + scene[0].sceneID + ', ' + minlevel + ')';
@@ -37,6 +38,7 @@ module.exports = {
       access.sceneByTag(tag, con, function(scene) {
         if (scene.length == 0) {
           let text = (msg.content.split('[')[1]).split(']')[0];
+          text = text.replace(/'/gi, '\'\'');
           let sql = 'INSERT INTO scene (tag, scenario) VALUES("' + tag + '", "' + text + '")';
           con.query(sql);
           msg.channel.send('Scene has been created with the ' + tag + ' tag.');
@@ -62,6 +64,7 @@ module.exports = {
           access.sceneByTag(scene2tag, con, function(scene2) {
             if (scene2.length == 1) {
               let ch = (msg.content.split('[')[1]).split(']')[0];
+              ch = ch.replace(/'/gi, '\'\'');
               let sql = 'INSERT INTO choice (tag, scene, next, choice) VALUES("' + tag + '", ' + scene1[0].sceneID + ', ' + scene2[0].sceneID + ', "' + ch + '")';
               con.query(sql);
               msg.channel.send('Choice has been created with the ' + tag + ' tag.');
@@ -87,6 +90,7 @@ module.exports = {
 
       if (!isNaN(id)) {
         let name = data[1];
+        name = name.replace(/'/gi, '\'\'');
         let link = data[2];
         let owner = msg.mentions.users.first().id;
         let sql = 'INSERT INTO castor (castorID, name, link, owner) VALUES(' + id + ', "' + name + '", "' + link + '", "' + owner + '")';
