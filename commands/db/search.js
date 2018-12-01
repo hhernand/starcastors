@@ -7,7 +7,7 @@ module.exports = {
     access.storyByTag(storytag, con, function(story) {
       if (story.length == 1) {
         let begin = 'Story Tag: ' + storytag + '\n\n**' + story[0].name + '**\n\n';
-        helper.displayScene(begin, story[0].start, msg, con);
+        helper.displayScene(begin, story[0].start, '<<castor>>', msg, con);
       }
       else {
         msg.channel.send('No story exists with that tag.');
@@ -19,7 +19,7 @@ module.exports = {
     let scenetag = msg.content.split(' ')[2];
     access.sceneByTag(scenetag, con, function(scene) {
       if (scene.length == 1) {
-        helper.displayScene('Scene Tag: ' + scenetag + '\n\n', scene[0].sceneID, msg, con);
+        helper.displayScene('Scene Tag: ' + scenetag + '\n\n', scene[0].sceneID, '<<castor>>', msg, con);
       }
       else {
         msg.channel.send('No scene exists with that tag.');
@@ -31,7 +31,7 @@ module.exports = {
     let choicetag = msg.content.split(' ')[2];
     access.choiceByTag(choicetag, con, function(choice) {
       if (choice.length == 1) {
-        helper.displayScene('Choice Tag ' + choicetag + ' appears in:\n\n', choice[0].scene, msg, con);
+        helper.displayScene('Choice Tag ' + choicetag + ' appears in:\n\n', choice[0].scene, '<<castor>>', msg, con);
       }
       else {
         msg.channel.send('No choice exists with that tag.');
