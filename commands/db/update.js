@@ -9,7 +9,7 @@ module.exports = {
         let word = data.split(' ')[1];
         if (word == 'text') {
           let text = (msg.content.split('[')[1]).split(']')[0];
-          text = text.replace(/'/gi, '\'\'');
+          text = text.replace(/"/gi, '\\"');
           let sql = 'UPDATE scene SET scenario = "' + text + '" WHERE sceneID = ' + scene[0].sceneID;
           con.query(sql);
           msg.channel.send('Scene text has been updated.');
@@ -26,7 +26,7 @@ module.exports = {
         let word = data.split(' ')[1];
         if (word == 'title') {
           let text = (msg.content.split('[')[1]).split(']')[0];
-          text = text.replace(/'/gi, '\'\'');
+          text = text.replace(/"/gi, '\\"');
           let sql = 'UPDATE story SET name = "' + text + '" WHERE storyID = ' + story[0].storyID;
           con.query(sql);
           msg.channel.send('Story title has been updated.');
