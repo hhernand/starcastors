@@ -13,7 +13,10 @@ module.exports = {
             }
           }
 
-          msg.channel.send(add + (scene[0].scenario).replace(/<<castor>>/gi, castor) + '\n\n' + options);
+          msg.channel.send(add + (scene[0].scenario).replace(/<<castor>>/gi, castor));
+          if (options != '') {
+            msg.channel.send(`==============================================================\n\n${options}`);
+          }
         })
       }
     })
