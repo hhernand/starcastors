@@ -5,14 +5,14 @@ module.exports = {
   start: function(msg, con) {
     let storytag = msg.content.split(' ')[1];
     access.storyByTag(storytag, con, function(story) {
-      if (story.length == 1) {
+      if (story.length === 1) {
         let castorid = msg.content.split(' ')[2];
         access.castorByID(castorid, con, function(castor) {
-          if (castor.length == 1) {
+          if (castor.length === 1) {
             if (castor[0].level >= story[0].minlevel) {
               access.castorLogByStory(castorid, story[0].storyID, con, function(log) {
-                if (log.length == 0) {
-                  if (msg.author.id == castor[0].owner) {
+                if (log.length === 0) {
+                  if (msg.author.id === castor[0].owner) {
                     let begin = '**' + story[0].name + '**\n\n';
                     helper.displayScene(begin, story[0].start, castor[0].name, msg, con);
                     let sql = 'INSERT INTO venturelog (castorID, sceneID, storyID) VALUES(' + castorid + ', ' + story[0].start + ', ' + story[0].storyID + ')';
@@ -42,7 +42,7 @@ module.exports = {
   pick: function(msg, con) {
     let choicetag = msg.content.split(' ')[1];
     access.choiceByTag(choicetag, con, function(choice) {
-      if (choice.length == 1) {
+      if (choice.length === 1) {
         let castorid = msg.content.split(' ')[2];
         access.castorByID(castorid, con, function(castor) {
           if (castor.length == 1) {
